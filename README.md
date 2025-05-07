@@ -1,5 +1,5 @@
 # CodeLookout
-An Open Source, AI-Powered Self-Hosted Code Review Tool
+An Open Source, AI-Powered Self-Hosted Code Review Tool, the steps to contribute can be clearly found in CONTRIBUTING.md please check it out before creating any pull request.
 
 ## Features
 - AI-Powered Pull Request Reviews
