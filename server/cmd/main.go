@@ -8,6 +8,8 @@ import (
 
 	"github.com/Mentro-Org/CodeLookout/internal/api"
 	"github.com/Mentro-Org/CodeLookout/internal/config"
+	githubclient "github.com/Mentro-Org/CodeLookout/internal/github"
+	"github.com/Mentro-Org/CodeLookout/internal/llm"
 	"github.com/joho/godotenv"
 )
 
@@ -18,9 +20,11 @@ func main() {
 	}
 
 	cfg := config.Load()
+	ghClientFactory := githubclient.NewClientFactory(cfg)
+	aiClient := llm.NewOpenAIClient(cfg)
 
 	// Setup router
-	r := api.NewRouter(cfg)
+	r := api.NewRouter(cfg, ghClientFactory, aiClient)
 
 	// Start server
 	addr := fmt.Sprintf(":%s", cfg.Port)

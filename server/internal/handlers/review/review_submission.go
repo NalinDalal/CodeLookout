@@ -5,6 +5,7 @@ import (
 	"log"
 
 	"github.com/Mentro-Org/CodeLookout/internal/config"
+	ghclient "github.com/Mentro-Org/CodeLookout/internal/github"
 
 	"github.com/google/go-github/github"
 )
@@ -15,8 +16,8 @@ type ReviewSubmission struct {
 	Comments []*github.DraftReviewComment
 }
 
-func (rs *ReviewSubmission) Execute(ctx context.Context, event *github.PullRequestEvent, cfg *config.Config) error {
-	client, err := NewGitHubClient(ctx, cfg, event.GetInstallation().GetID())
+func (rs *ReviewSubmission) Execute(ctx context.Context, event *github.PullRequestEvent, cfg *config.Config, ghClientFactory *ghclient.ClientFactory) error {
+	client, err := ghClientFactory.GetClient(ctx, event.GetInstallation().GetID())
 	if err != nil {
 		return err
 	}

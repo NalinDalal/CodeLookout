@@ -5,11 +5,14 @@ import (
 
 	"github.com/Mentro-Org/CodeLookout/internal/config"
 	"github.com/Mentro-Org/CodeLookout/internal/core"
+	ghclient "github.com/Mentro-Org/CodeLookout/internal/github"
 	pr "github.com/Mentro-Org/CodeLookout/internal/handlers/pullrequest"
+	"github.com/Mentro-Org/CodeLookout/internal/llm"
+
 	"github.com/google/go-github/github"
 )
 
-func WebhookHandler(cfg *config.Config) http.HandlerFunc {
+func WebhookHandler(cfg *config.Config, ghClientFactory *ghclient.ClientFactory, aiClient llm.AIClient) http.HandlerFunc {
 	return func(w http.ResponseWriter, r *http.Request) {
 		ctx := r.Context()
 
@@ -27,7 +30,7 @@ func WebhookHandler(cfg *config.Config) http.HandlerFunc {
 
 		switch e := event.(type) {
 		case *github.PullRequestEvent:
-			handler := routePullRequestEvent(e.GetAction(), cfg)
+			handler := routePullRequestEvent(e.GetAction(), cfg, ghClientFactory, aiClient)
 			if handler == nil {
 				http.Error(w, "Unsupported PR action", http.StatusNotImplemented)
 				return
@@ -46,14 +49,14 @@ func WebhookHandler(cfg *config.Config) http.HandlerFunc {
 	}
 }
 
-func routePullRequestEvent(action string, cfg *config.Config) core.PullRequestHandler {
+func routePullRequestEvent(action string, cfg *config.Config, ghClientFactory *ghclient.ClientFactory, aiClient llm.AIClient) core.PullRequestHandler {
 	switch action {
 	case "opened":
-		return &pr.PullRequestOpenedHandler{Cfg: cfg}
+		return &pr.PullRequestOpenedHandler{Cfg: cfg, GHClientFactory: ghClientFactory, AIClient: aiClient}
 	case "edited":
-		return &pr.PullRequestEditedHandler{Cfg: cfg}
+		return &pr.PullRequestEditedHandler{Cfg: cfg, GHClientFactory: ghClientFactory, AIClient: aiClient}
 	case "synchronize":
-		return &pr.PullRequestSynchronizedHandler{Cfg: cfg}
+		return &pr.PullRequestSynchronizedHandler{Cfg: cfg, GHClientFactory: ghClientFactory, AIClient: aiClient}
 	default:
 		return nil
 	}
