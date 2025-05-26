@@ -26,11 +26,16 @@ jobs:
         run: |
           curl -sSfL https://raw.githubusercontent.com/golangci/golangci-lint/master/install.sh | sh -s latest
           sudo mv ./bin/golangci-lint /usr/local/bin/
+        working-directory: server
+
       - name: Run Make Build
         run: make build
+        working-directory: server
+
       - name: Run Make Test
         run: make test
         working-directory: server
+
       - name: Run Make Lint
         run: make lint
         working-directory: server

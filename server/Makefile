@@ -1,7 +1,7 @@
 APP_NAME := myapp
 VERSION ?= $(shell git describe --tags --always)
 BUILD_DIR := build
-MAIN_PACKAGE := ./server/cmd
+MAIN_PACKAGE := ./cmd
 
 .PHONY: all build test lint clean release
 
