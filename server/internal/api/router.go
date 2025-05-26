@@ -2,7 +2,7 @@ package api
 
 import (
 	"net/http"
-
+"log"
 	"github.com/Mentro-Org/CodeLookout/internal/config"
 	ghclient "github.com/Mentro-Org/CodeLookout/internal/github"
 	"github.com/Mentro-Org/CodeLookout/internal/handlers"
