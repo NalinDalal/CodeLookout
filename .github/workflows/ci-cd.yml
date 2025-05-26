@@ -28,10 +28,13 @@ jobs:
           sudo mv ./bin/golangci-lint /usr/local/bin/
       - name: Run Make Build
         run: make build
+        working-directory: server
       - name: Run Make Test
         run: make test
+        working-directory: server
       - name: Run Make Lint
         run: make lint
+        working-directory: server
 
   cd:
     if: startsWith(github.ref, 'refs/tags/')
