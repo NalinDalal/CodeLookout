@@ -20,9 +20,6 @@ func NewRouter(cfg *config.Config, ghClientFactory *ghclient.ClientFactory, aiCl
 	r.Route("/api", func(r chi.Router) {
 		r.Get("/health-check", func(w http.ResponseWriter, r *http.Request) {
 			w.WriteHeader(http.StatusOK)
-			if _, err := w.Write([]byte("ok")); err != nil {
-				log.Printf("failed to write response: %v", err)
-			}
 		})
 		service := handlers.NewWebhookHandlerService(cfg, ghClientFactory, aiClient, dbPool)
 		r.Post("/webhook", service.HandleWebhook())
