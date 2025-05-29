@@ -29,16 +29,18 @@ jobs:
           sudo mv ./bin/golangci-lint /usr/local/bin/
         working-directory: server
 
-      - name: Build
-        run: go build ./...
+      - name: Lint
+        run: golangci-lint run ./...
         working-directory: server
+      
       
       - name: Test
         run: go test ./...
         working-directory: server
 
-      - name: Lint
-        run: golangci-lint run ./...
+      
+      - name: Build
+        run: go build ./...
         working-directory: server
 
   cd:
