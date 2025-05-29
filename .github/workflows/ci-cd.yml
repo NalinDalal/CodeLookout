@@ -21,6 +21,7 @@ jobs:
         with:
           path: ~/golangci-lint
           key: ${{ runner.os }}-golangci-lint-${{ hashFiles('**/go.mod', '**/go.sum') }}
+
       - name: Install golangci-lint
         if: steps.cache.outputs.cache-hit != 'true'
         run: |
@@ -28,16 +29,16 @@ jobs:
           sudo mv ./bin/golangci-lint /usr/local/bin/
         working-directory: server
 
-      - name: Run Make Build
-        run: make build
+      - name: Build
+        run: go build ./...
+        working-directory: server
+      
+      - name: Test
+        run: go test ./...
         working-directory: server
 
-      - name: Run Make Test
-        run: make test
-        working-directory: server
-
-      - name: Run Make Lint
-        run: make lint
+      - name: Lint
+        run: golangci-lint run ./...
         working-directory: server
 
   cd:
@@ -48,11 +49,12 @@ jobs:
       - uses: actions/setup-go@v4
         with:
           go-version: '^1.20'
-      - name: Run Make Release
-        run: make release
+      - name: Build release binary
+        run: go build -o build/app
         working-directory: server
+
       - name: Upload binaries
         uses: actions/upload-artifact@v4
         with:
           name: release-binaries
-          path: server/build/
+          path: server/build/ 
