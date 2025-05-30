@@ -28,9 +28,7 @@ func main() {
 	// Initialize the database connection
 	dbPool := db.ConnectDB(ctx, cfg)
 	defer dbPool.Close()
-	if err := dbPool.Ping(ctx); err != nil {
-		log.Fatalf("Failed to connect to the database: %v", err)
-	}
+	
 	log.Println("Successfully connected to the database")
 
 	ghClientFactory := githubclient.NewClientFactory(cfg)
