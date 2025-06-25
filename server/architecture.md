@@ -54,19 +54,14 @@ v
 
 ```mermaid
 flowchart TD
-    main["main()"]
-    deps[initializeDependencies()]
-    sig[signalListener() \n (goroutine)]
-    worker[runWorker() \n (goroutine)]
-    server[startServer() \n (goroutine)]
-    wait[wg.Wait()]
+    main[main function] --> init[Initialize Dependencies]
+    init --> sig[SIGINT Listener Goroutine]
+    init --> runworker[Run Worker Goroutine]
+    init --> startserver[Start Server Goroutine]
+    sig --> wait[Wait for Shutdown]
+    runworker --> wait
+    startserver --> wait
 
-    main --> deps --> sig
-    deps --> worker
-    deps --> server
-    sig --> wait
-    worker --> wait
-    server --> wait
 
 ```
 
