@@ -2,28 +2,22 @@
 
 ```mermaid
 flowchart LR
-    A[GitHub Webhook (PR Open/Update)] --> B[HTTP Server (API)]
-    B --> C[Redis (Asynq DB)]
-    C --> D[Asynq Worker]
-    D --> E[AI Review Engine (LLM-based)]
-    E --> F[GitHub API (Post Comments)]
+    ghwebhook[GitHub Webhook PR Open or Update] --> httpapi[HTTP Server API]
+    httpapi --> redis[Redis Asynq DB]
+    redis --> worker[Asynq Worker]
+    worker --> ai[AI Review Engine LLM]
+    ai --> ghapi[GitHub API Post Comments]
 
-    subgraph "HTTP Server (API)"
-        B1[Validates Webhook]
-        B2[Enqueues Task (Asynq)]
-    end
-    B --> B1
-    B1 --> B2
-    B2 --> C
+    httpapi --> validate[Validate Webhook]
+    validate --> enqueue[Enqueue Task Asynq]
+    enqueue --> redis
 
-    subgraph "Asynq Worker"
-        D1[Dequeues Task]
-        D2[Fetches PR Diff]
-        D3[Builds Prompt]
-        D4[Calls AI API]
-        D5[Posts Comments]
-    end
-    D --> D1 --> D2 --> D3 --> D4 --> D5 --> F
+    worker --> dequeue[Dequeues Task]
+    dequeue --> fetch[Fetch PR Diff]
+    fetch --> buildprompt[Build Prompt]
+    buildprompt --> callai[Call AI API]
+    callai --> postcomment[Post Comments]
+    postcomment --> ghapi
 
 ```
 
