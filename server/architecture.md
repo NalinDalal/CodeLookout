@@ -2,11 +2,11 @@
 
 ```mermaid
 flowchart LR
-    A[GitHub Webhook<br>(PR Open/Update)] --> B[HTTP Server (API)]
+    A[GitHub Webhook\n(PR Open/Update)] --> B[HTTP Server (API)]
     B --> C[Redis (Asynq DB)]
     C --> D[Asynq Worker]
-    D --> E[AI Review Engine<br>(LLM-based)]
-    E --> F[GitHub API<br>(Post Comments)]
+    D --> E[AI Review Engine\n(LLM-based)]
+    E --> F[GitHub API\n(Post Comments)]
 
     subgraph "HTTP Server (API)"
         B1[Validates Webhook]
@@ -56,9 +56,9 @@ v
 flowchart TD
     main["main()"]
     deps[initializeDependencies()]
-    sig[signalListener() <br> (goroutine)]
-    worker[runWorker() <br> (goroutine)]
-    server[startServer() <br> (goroutine)]
+    sig[signalListener() \n (goroutine)]
+    worker[runWorker() \n (goroutine)]
+    server[startServer() \n (goroutine)]
     wait[wg.Wait()]
 
     main --> deps --> sig
@@ -79,4 +79,3 @@ flowchart TD
 ├─ RunWorker() goroutine │ (listens for ctx cancel)
 ├─ startServer() goroutine │ (listens for ctx cancel)
 └─ wg.Wait() <──────────────────┘ waits for both
-
