@@ -2,11 +2,11 @@
 
 ```mermaid
 flowchart LR
-    A[GitHub Webhook\n(PR Open/Update)] --> B[HTTP Server (API)]
+    A[GitHub Webhook (PR Open/Update)] --> B[HTTP Server (API)]
     B --> C[Redis (Asynq DB)]
     C --> D[Asynq Worker]
-    D --> E[AI Review Engine\n(LLM-based)]
-    E --> F[GitHub API\n(Post Comments)]
+    D --> E[AI Review Engine (LLM-based)]
+    E --> F[GitHub API (Post Comments)]
 
     subgraph "HTTP Server (API)"
         B1[Validates Webhook]
