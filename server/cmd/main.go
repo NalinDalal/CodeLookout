@@ -3,8 +3,6 @@ package main
 import (
     "log"
     "sync"
-	"github.com/nalindalal/CodeLookout/server/cmd/llm_cli"
-	"github.com/nalindalal/CodeLookout/server/cmd/sonarqube_cli"
 )
 
 func main() {
