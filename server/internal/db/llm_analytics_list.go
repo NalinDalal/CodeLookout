@@ -59,32 +59,4 @@ func ListLLMAnalyticsFiltered(ctx context.Context, db *pgxpool.Pool, limit, offs
 	       results = append(results, a)
        }
        return results, nil
-}
-package db
 
-import (
-	"context"
-	"github.com/jackc/pgx/v5/pgxpool"
-)
-
-func ListLLMAnalytics(ctx context.Context, db *pgxpool.Pool, limit, offset int) ([]LLMAnalytics, error) {
-	rows, err := db.Query(ctx, `
-		SELECT id, created_at, prompt, response, duration_ms, error, pr_number, repo, owner
-		FROM llm_analytics
-		ORDER BY created_at DESC
-		LIMIT $1 OFFSET $2
-	`, limit, offset)
-	if err != nil {
-		return nil, err
-	}
-	defer rows.Close()
-	var results []LLMAnalytics
-	for rows.Next() {
-		var a LLMAnalytics
-		if err := rows.Scan(&a.ID, &a.CreatedAt, &a.Prompt, &a.Response, &a.DurationMs, &a.Error, &a.PRNumber, &a.Repo, &a.Owner); err != nil {
-			return nil, err
-		}
-		results = append(results, a)
-	}
-	return results, nil
-}
