@@ -58,5 +58,5 @@ func ListLLMAnalyticsFiltered(ctx context.Context, db *pgxpool.Pool, limit, offs
 	       }
 	       results = append(results, a)
        }
-       return results, nil
-
+	return results, nil
+}
