@@ -1,5 +1,11 @@
 package db
 
+import (
+	"context"
+	"strconv"
+	"github.com/jackc/pgx/v5/pgxpool"
+)
+
 type LLMAnalyticsFilters struct {
 	Error    string
 	Repo     string
