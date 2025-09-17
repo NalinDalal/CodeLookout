@@ -1,13 +1,13 @@
-type LLMAnalyticsFilters struct {
-	package db
+package db
 
-       Error    string
-       Repo     string
-       Owner    string
-       PRNumber string
-       Since    string // ISO8601 or date string
-       Until    string
-	type LLMAnalyticsFilters struct {
+type LLMAnalyticsFilters struct {
+	Error    string
+	Repo     string
+	Owner    string
+	PRNumber string
+	Since    string // ISO8601 or date string
+	Until    string
+}
 
 func ListLLMAnalyticsFiltered(ctx context.Context, db *pgxpool.Pool, limit, offset int, f LLMAnalyticsFilters) ([]LLMAnalytics, error) {
        query := `SELECT id, created_at, prompt, response, duration_ms, error, pr_number, repo, owner FROM llm_analytics WHERE 1=1`
