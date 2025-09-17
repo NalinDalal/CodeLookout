@@ -2,13 +2,10 @@ package api
 
 import (
 	"net/http"
-"log"
-	"github.com/Mentro-Org/CodeLookout/internal/config"
-	ghclient "github.com/Mentro-Org/CodeLookout/internal/github"
-
 	"github.com/Mentro-Org/CodeLookout/internal/handlers"
 	"github.com/go-chi/chi/v5"
 	"github.com/go-chi/chi/v5/middleware"
+	"github.com/Mentro-Org/CodeLookout/internal/core"
 )
 
 func NewRouter(appDeps *core.AppDeps) http.Handler {

@@ -3,7 +3,6 @@ package llm
 import (
 	"context"
 	"io"
-	"log"
 	"os"
 	"path/filepath"
 	"sync"

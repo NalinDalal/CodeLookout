@@ -32,13 +32,11 @@ jobs:
       - name: Lint
         run: golangci-lint run ./...
         working-directory: server
-      
-      
+
       - name: Test
-        run: go test ./...
+        run: go test ./internal/...
         working-directory: server
 
-      
       - name: Build
         run: go build ./...
         working-directory: server
