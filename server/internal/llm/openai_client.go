@@ -1,14 +1,14 @@
 package llm
 
 import (
-	"context"
-	"io"
-	"os"
-	"path/filepath"
-	"sync"
+    "context"
+    "io"
+    "os"
+    "path/filepath"
+    "sync"
 
-	"github.com/Mentro-Org/CodeLookout/internal/config"
-	openai "github.com/sashabaranov/go-openai"
+    "github.com/nalindalal/CodeLookout/server/internal/config"
+    openai "github.com/sashabaranov/go-openai"
 )
 
 type OpenAIClient struct {

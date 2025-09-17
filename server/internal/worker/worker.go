@@ -1,13 +1,13 @@
 package worker
 
 import (
-	"context"
-	"log"
+    "context"
+    "log"
 
-	"github.com/Mentro-Org/CodeLookout/internal/core"
-	"github.com/Mentro-Org/CodeLookout/internal/handlers"
-	"github.com/Mentro-Org/CodeLookout/internal/queue"
-	"github.com/hibiken/asynq"
+    "github.com/nalindalal/CodeLookout/server/internal/core"
+    "github.com/nalindalal/CodeLookout/server/internal/handlers"
+    "github.com/nalindalal/CodeLookout/server/internal/queue"
+    "github.com/hibiken/asynq"
 )
 
 // This worker picks review jobs form queue and execute required actions

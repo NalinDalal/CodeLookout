@@ -1,10 +1,10 @@
 package llm
 
 import (
-	"fmt"
+  "fmt"
 
-	"github.com/Mentro-Org/CodeLookout/internal/queue"
-	"github.com/google/go-github/v72/github"
+  "github.com/nalindalal/CodeLookout/server/internal/queue"
+  "github.com/google/go-github/v72/github"
 )
 
 func BuildPRReviewPrompt(payload *queue.PRReviewTaskPayload, files []*github.CommitFile) string {

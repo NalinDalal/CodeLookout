@@ -1,14 +1,14 @@
 package githubclient
 
 import (
-	"context"
-	"log"
-	"net/http"
-	"sync"
+    "context"
+    "log"
+    "net/http"
+    "sync"
 
-	"github.com/Mentro-Org/CodeLookout/internal/config"
-	"github.com/bradleyfalzon/ghinstallation/v2"
-	"github.com/google/go-github/v72/github"
+    "github.com/nalindalal/CodeLookout/server/internal/config"
+    "github.com/bradleyfalzon/ghinstallation/v2"
+    "github.com/google/go-github/v72/github"
 )
 
 // GitHub App installations have unique IDs, and each requires its own scoped authentication token.

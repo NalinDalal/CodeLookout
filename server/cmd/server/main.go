@@ -1,25 +1,25 @@
 package main
 
 import (
-	"context"
-	"fmt"
-	"log"
-	"net/http"
-	"os"
-	"os/signal"
-	"sync"
-	"syscall"
-	"time"
+    "context"
+    "fmt"
+    "log"
+    "net/http"
+    "os"
+    "os/signal"
+    "sync"
+    "syscall"
+    "time"
 
-	"github.com/Mentro-Org/CodeLookout/internal/api"
-	"github.com/Mentro-Org/CodeLookout/internal/config"
-	"github.com/Mentro-Org/CodeLookout/internal/core"
-	"github.com/Mentro-Org/CodeLookout/internal/db"
-	githubclient "github.com/Mentro-Org/CodeLookout/internal/github"
-	"github.com/Mentro-Org/CodeLookout/internal/llm"
-	"github.com/Mentro-Org/CodeLookout/internal/queue"
-	"github.com/Mentro-Org/CodeLookout/internal/worker"
-	"github.com/joho/godotenv"
+    "github.com/nalindalal/CodeLookout/server/internal/api"
+    "github.com/nalindalal/CodeLookout/server/internal/config"
+    "github.com/nalindalal/CodeLookout/server/internal/core"
+    "github.com/nalindalal/CodeLookout/server/internal/db"
+    githubclient "github.com/nalindalal/CodeLookout/server/internal/github"
+    "github.com/nalindalal/CodeLookout/server/internal/llm"
+    "github.com/nalindalal/CodeLookout/server/internal/queue"
+    "github.com/nalindalal/CodeLookout/server/internal/worker"
+    "github.com/joho/godotenv"
 )
 
 func initializeDependencies() (*core.AppDeps, error) {

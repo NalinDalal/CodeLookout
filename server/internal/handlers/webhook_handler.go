@@ -1,13 +1,13 @@
 package handlers
 
 import (
-	"log"
-	"net/http"
+    "log"
+    "net/http"
 
-	"github.com/Mentro-Org/CodeLookout/internal/core"
-	"github.com/Mentro-Org/CodeLookout/internal/queue"
+    "github.com/nalindalal/CodeLookout/server/internal/core"
+    "github.com/nalindalal/CodeLookout/server/internal/queue"
 
-	"github.com/google/go-github/v72/github"
+    "github.com/google/go-github/v72/github"
 )
 
 func HandleWebhook(appDeps *core.AppDeps) http.HandlerFunc {

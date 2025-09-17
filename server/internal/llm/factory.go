@@ -1,9 +1,9 @@
 package llm
 
 import (
-	"fmt"
+    "fmt"
 
-	"github.com/Mentro-Org/CodeLookout/internal/config"
+    "github.com/nalindalal/CodeLookout/server/internal/config"
 )
 
 // NewClient returns an AIClient based on configuration (OpenAI, REST LLM, etc.)

@@ -1,12 +1,12 @@
 package review
 
 import (
-	"context"
-	"log"
+    "context"
+    "log"
 
-	"github.com/Mentro-Org/CodeLookout/internal/core"
-	"github.com/Mentro-Org/CodeLookout/internal/llm"
-	"github.com/Mentro-Org/CodeLookout/internal/queue"
+    "github.com/nalindalal/CodeLookout/server/internal/core"
+    "github.com/nalindalal/CodeLookout/server/internal/llm"
+    "github.com/nalindalal/CodeLookout/server/internal/queue"
 )
 
 func HandleReviewResponseFromAI(ctx context.Context, payload queue.PRReviewTaskPayload, appDeps *core.AppDeps, aiJsonResponse string) error {

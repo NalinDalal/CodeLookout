@@ -1,12 +1,12 @@
 package db
 
 import (
-	"context"
-	"log"
+    "context"
+    "log"
 
-	"github.com/Mentro-Org/CodeLookout/internal/config"
-	// pgxpool provides a PostgreSQL connection pool based on the pgx driver.
-	"github.com/jackc/pgx/v5/pgxpool"
+    "github.com/nalindalal/CodeLookout/server/internal/config"
+    // pgxpool provides a PostgreSQL connection pool based on the pgx driver.
+    "github.com/jackc/pgx/v5/pgxpool"
 )
 
 func ConnectDB(ctx context.Context, cfg *config.Config) *pgxpool.Pool {

@@ -1,11 +1,11 @@
 package api
 
 import (
-	"net/http"
-	"github.com/Mentro-Org/CodeLookout/internal/handlers"
-	"github.com/go-chi/chi/v5"
-	"github.com/go-chi/chi/v5/middleware"
-	"github.com/Mentro-Org/CodeLookout/internal/core"
+    "net/http"
+    "github.com/nalindalal/CodeLookout/server/internal/handlers"
+    "github.com/go-chi/chi/v5"
+    "github.com/go-chi/chi/v5/middleware"
+    "github.com/nalindalal/CodeLookout/server/internal/core"
 )
 
 func NewRouter(appDeps *core.AppDeps) http.Handler {

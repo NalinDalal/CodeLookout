@@ -1,14 +1,14 @@
 package core
 
 import (
-	"context"
+    "context"
 
-	"github.com/Mentro-Org/CodeLookout/internal/config"
-	ghclient "github.com/Mentro-Org/CodeLookout/internal/github"
-	"github.com/Mentro-Org/CodeLookout/internal/llm"
-	"github.com/Mentro-Org/CodeLookout/internal/queue"
-	"github.com/google/go-github/v72/github"
-	"github.com/jackc/pgx/v5/pgxpool"
+    "github.com/nalindalal/CodeLookout/server/internal/config"
+    ghclient "github.com/nalindalal/CodeLookout/server/internal/github"
+    "github.com/nalindalal/CodeLookout/server/internal/llm"
+    "github.com/nalindalal/CodeLookout/server/internal/queue"
+    "github.com/google/go-github/v72/github"
+    "github.com/jackc/pgx/v5/pgxpool"
 )
 
 type AppDeps struct {

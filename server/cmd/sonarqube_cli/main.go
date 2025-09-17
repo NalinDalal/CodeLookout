@@ -1,11 +1,11 @@
 package main
 
 import (
-	"fmt"
-	"os"
+    "fmt"
+    "os"
 
-	"github.com/Mentro-Org/CodeLookout/internal/config"
-	"github.com/Mentro-Org/CodeLookout/internal/llm"
+    "github.com/nalindalal/CodeLookout/server/internal/config"
+    "github.com/nalindalal/CodeLookout/server/internal/llm"
 )
 
 // This CLI demonstrates SonarQube integration using SonarQubeClient

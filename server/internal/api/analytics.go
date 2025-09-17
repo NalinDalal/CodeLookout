@@ -1,13 +1,13 @@
 package api
 
 import (
-	"encoding/json"
-	"net/http"
-	"strconv"
-	"context"
+    "encoding/json"
+    "net/http"
+    "strconv"
+    "context"
 
-	"github.com/Mentro-Org/CodeLookout/internal/core"
-	db "github.com/Mentro-Org/CodeLookout/internal/db"
+    "github.com/nalindalal/CodeLookout/server/internal/core"
+    db "github.com/nalindalal/CodeLookout/server/internal/db"
 )
 
 type AnalyticsResponse struct {

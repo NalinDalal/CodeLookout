@@ -1,18 +1,18 @@
 package handlers
 
 import (
-	"context"
-	"encoding/json"
-	"fmt"
-	"log"
-	"time"
+    "context"
+    "encoding/json"
+    "fmt"
+    "log"
+    "time"
 
-	"github.com/Mentro-Org/CodeLookout/internal/core"
-	"github.com/Mentro-Org/CodeLookout/internal/handlers/review"
-	"github.com/Mentro-Org/CodeLookout/internal/llm"
-	"github.com/Mentro-Org/CodeLookout/internal/queue"
-	db "github.com/Mentro-Org/CodeLookout/internal/db"
-	"github.com/hibiken/asynq"
+    "github.com/nalindalal/CodeLookout/server/internal/core"
+    "github.com/nalindalal/CodeLookout/server/internal/handlers/review"
+    "github.com/nalindalal/CodeLookout/server/internal/llm"
+    "github.com/nalindalal/CodeLookout/server/internal/queue"
+    db "github.com/nalindalal/CodeLookout/server/internal/db"
+    "github.com/hibiken/asynq"
 )
 
 func HandleReviewForPR(ctx context.Context, t *asynq.Task, appDeps *core.AppDeps) error {

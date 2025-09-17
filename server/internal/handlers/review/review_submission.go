@@ -1,10 +1,10 @@
 package review
 
 import (
-	"log"
+    "log"
 
-	"github.com/Mentro-Org/CodeLookout/internal/core"
-	"github.com/google/go-github/v72/github"
+    "github.com/nalindalal/CodeLookout/server/internal/core"
+    "github.com/google/go-github/v72/github"
 )
 
 type ReviewSubmission struct {
