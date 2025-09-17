@@ -14,9 +14,9 @@ func NewRouter(appDeps *core.AppDeps) http.Handler {
 	r.Use(middleware.Logger)
 
        r.Route("/api", func(r chi.Router) {
-	       r.Get("/health-check", func(w http.ResponseWriter, r *http.Request) {
-		       w.WriteHeader(http.StatusOK)
-	       })
+           r.Get("/health-check", func(w http.ResponseWriter, r *http.Request) {
+               w.WriteHeader(http.StatusOK) // No error to check for WriteHeader
+           })
 	       r.Post("/webhook", handlers.HandleWebhook(appDeps))
 	       r.Get("/analytics", HandleLLMAnalytics(appDeps))
        })

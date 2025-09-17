@@ -49,6 +49,6 @@ func HandleWebhook(appDeps *core.AppDeps) http.HandlerFunc {
 			return
 		}
 
-		w.WriteHeader(http.StatusAccepted)
+		w.WriteHeader(http.StatusAccepted) // No error to check for WriteHeader
 	}
 }

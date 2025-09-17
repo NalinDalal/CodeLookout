@@ -5,6 +5,7 @@ import (
     "net/http"
     "strconv"
     "context"
+	"fmt"
 
     "github.com/nalindalal/CodeLookout/server/internal/core"
     db "github.com/nalindalal/CodeLookout/server/internal/db"
@@ -42,10 +43,16 @@ func HandleLLMAnalytics(appDeps *core.AppDeps) http.HandlerFunc {
 	       results, err := db.ListLLMAnalyticsFiltered(ctx, appDeps.DBPool, limit, offset, filters)
 	       if err != nil {
 		       w.WriteHeader(http.StatusInternalServerError)
-		       w.Write([]byte("error fetching analytics"))
+		       if _, err := w.Write([]byte("error fetching analytics")); err != nil {
+			       // Optionally log the error
+			       fmt.Println("error writing response:", err)
+		       }
 		       return
 	       }
 	       w.Header().Set("Content-Type", "application/json")
-	       json.NewEncoder(w).Encode(AnalyticsResponse{Results: results})
+	       if err := json.NewEncoder(w).Encode(AnalyticsResponse{Results: results}); err != nil {
+		       // Optionally log the error
+		       fmt.Println("error encoding response:", err)
+	       }
 	}
 }
