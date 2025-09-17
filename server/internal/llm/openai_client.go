@@ -47,14 +47,19 @@ func (c *OpenAIClient) GenerateReviewForPR(ctx context.Context, prompt string) (
 
 // use this for development(no need to call AI API to get review json)
 func (c *OpenAIClient) GenerateSampleReviewForPR() (string, error) {
-	rootDir, err := os.Getwd()
-	
+	rootDir, _ := os.Getwd()
 	jsonPath := filepath.Join(rootDir, "data", "openai-review.json")
 	file, err := os.Open(jsonPath)
 	if err != nil {
 		return "", err
 	}
-	defer file.Close()
+	defer func() {
+		cerr := file.Close()
+		if cerr != nil {
+			// Log the error for now
+			println("warning: failed to close file:", cerr.Error())
+		}
+	}()
 	bytes, err := io.ReadAll(file)
 	if err != nil {
 		return "", err
