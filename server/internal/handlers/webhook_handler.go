@@ -50,6 +50,5 @@ func HandleWebhook(appDeps *core.AppDeps) http.HandlerFunc {
 		}
 
 		w.WriteHeader(http.StatusAccepted)
-		return
 	}
 }
