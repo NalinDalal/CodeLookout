@@ -7,6 +7,7 @@ import (
 	"github.com/kelseyhightower/envconfig"
 )
 
+// Removed duplicate struct declaration
 type Config struct {
 	Port              string `envconfig:"PORT" default:"8080"`
 	AppEnv            string `envconfig:"APP_ENV" default:"development"`
@@ -20,6 +21,13 @@ type Config struct {
 
 	WebhookSecret           string `envconfig:"WEBHOOK_SECRET" required:"true"`
 	GithubAppPrivateKeyPath string `envconfig:"GITHUB_APP_PRIVATE_KEY_PATH" required:"true"`
+
+	// LLM REST endpoint for HuggingFace, Ollama, etc.
+	LLMEndpoint string `envconfig:"LLM_ENDPOINT"`
+
+	// SonarQube integration
+	SonarQubeEndpoint string `envconfig:"SONARQUBE_ENDPOINT"`
+	SonarQubeToken    string `envconfig:"SONARQUBE_TOKEN"`
 
 	GithubAppPrivateKey []byte `ignored:"true"` // not from env
 }

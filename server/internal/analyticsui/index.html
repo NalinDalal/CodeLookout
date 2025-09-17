@@ -1,0 +1,85 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>LLM Analytics Dashboard</title>
+  <style>
+    body { font-family: sans-serif; margin: 2rem; background: #f8f9fa; }
+    h1 { color: #333; }
+    table { border-collapse: collapse; width: 100%; background: #fff; }
+    th, td { border: 1px solid #ddd; padding: 8px; }
+    th { background: #f1f1f1; }
+    tr:nth-child(even) { background: #f9f9f9; }
+    .error { color: #b00; font-weight: bold; }
+    .prompt, .response { max-width: 400px; word-break: break-all; font-size: 0.95em; }
+  </style>
+</head>
+<body>
+  <h1>LLM Analytics Dashboard</h1>
+  <form id="filter-form" style="margin-bottom:1em;">
+    <label>Repo: <input type="text" name="repo"></label>
+    <label>Owner: <input type="text" name="owner"></label>
+    <label>PR #: <input type="number" name="pr_number" min="1"></label>
+    <label>Error: <input type="text" name="error"></label>
+    <label>Since: <input type="date" name="since"></label>
+    <label>Until: <input type="date" name="until"></label>
+    <button type="submit">Filter</button>
+    <button type="button" id="clear-btn">Clear</button>
+  </form>
+  <table id="analytics-table">
+    <thead>
+      <tr>
+        <th>Time</th>
+        <th>PR</th>
+        <th>Repo</th>
+        <th>Prompt</th>
+        <th>Response</th>
+        <th>Duration (ms)</th>
+        <th>Error</th>
+      </tr>
+    </thead>
+    <tbody></tbody>
+  </table>
+  <script>
+    function getFilters() {
+      const form = document.getElementById('filter-form');
+      const params = new URLSearchParams();
+      for (const el of form.elements) {
+        if (el.name && el.value) params.append(el.name, el.value);
+      }
+      return params.toString();
+    }
+    async function fetchAnalytics() {
+      const params = getFilters();
+      const res = await fetch('/api/analytics?limit=50' + (params ? '&' + params : ''));
+      const data = await res.json();
+      const tbody = document.querySelector('#analytics-table tbody');
+      tbody.innerHTML = '';
+      for (const row of data.results) {
+        const tr = document.createElement('tr');
+        tr.innerHTML = `
+          <td>${new Date(row.created_at).toLocaleString()}</td>
+          <td>${row.pr_number}</td>
+          <td>${row.owner}/${row.repo}</td>
+          <td class="prompt">${row.prompt}</td>
+          <td class="response">${row.response}</td>
+          <td>${row.duration_ms}</td>
+          <td class="error">${row.error || ''}</td>
+        `;
+        tbody.appendChild(tr);
+      }
+    }
+    document.getElementById('filter-form').onsubmit = (e) => {
+      e.preventDefault();
+      fetchAnalytics();
+    };
+    document.getElementById('clear-btn').onclick = () => {
+      document.getElementById('filter-form').reset();
+      fetchAnalytics();
+    };
+    fetchAnalytics();
+    setInterval(fetchAnalytics, 10000);
+  </script>
+</body>
+</html>
